@@ -11,10 +11,10 @@ function getRandomInt() {
 export type Todo = {
   id: number;
   task: string;
-}[];
+};
 
 function App() {
-  const defaultTodos: Todo = [
+  const defaultTodos: Array<Todo> = [
     {
       id: getRandomInt(),
       task: "Eat",
@@ -38,7 +38,10 @@ function App() {
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log("Click");
+    if (!inputTask) {
+      alert("You can't leave inpute blank");
+      return;
+    }
     setTasks([
       ...tasks,
       {
@@ -59,7 +62,7 @@ function App() {
     <Container className="app" fixed>
       <Add
         inputTask={inputTask}
-        setInputTask={setInputTask}
+        handleInput={(taskName: string) => setInputTask(taskName)}
         handleSubmit={handleSubmit}
       />
       <Display tasks={tasks} deleteTask={deleteTask} />

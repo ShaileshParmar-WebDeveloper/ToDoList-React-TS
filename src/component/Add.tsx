@@ -1,4 +1,5 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,24 +11,25 @@ const useStyles = makeStyles((theme) => ({
 
 type AddProps = {
   inputTask: string;
-  setInputTask: Function;
-  handleSubmit: Function;
+  handleInput: (input: string) => void;
+  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-function Add({ inputTask, setInputTask, handleSubmit }: AddProps) {
+function Add({ inputTask, handleInput, handleSubmit }: AddProps) {
   const classes = useStyles();
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <TextField
-        onChange={(e) => setInputTask(e.target.value)}
+        onChange={(e) => handleInput(e.target.value)}
         value={inputTask}
         id="outlined-basic"
-        label="Outlined"
+        label="Add your Task"
         variant="outlined"
+        required
       />
       <Button
         type="submit"
-        onClick={(e) => handleSubmit(e)}
+        onClick={handleSubmit}
         variant="contained"
         color="primary"
       >

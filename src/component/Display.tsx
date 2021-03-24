@@ -3,14 +3,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Todo } from "../App";
 
 type DisplayProps = {
-  tasks: Todo;
+  tasks: Array<Todo>;
   deleteTask: Function;
 };
 
 function Display({ tasks, deleteTask }: DisplayProps) {
   return (
     <div className="task_container">
-      {tasks.length === 0 ? (
+      {!tasks.length ? (
         <h2>No Task</h2>
       ) : (
         <ol>
