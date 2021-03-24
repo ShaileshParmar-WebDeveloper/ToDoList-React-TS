@@ -1,4 +1,5 @@
 import { Container } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import { useState } from "react";
 import "./App.css";
 import Add from "./component/Add";
@@ -35,11 +36,12 @@ function App() {
 
   const [tasks, setTasks] = useState(defaultTodos);
   const [inputTask, setInputTask] = useState("");
+  const [errAlert, setErrAlert] = useState(false);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (!inputTask) {
-      alert("You can't leave inpute blank");
+      setErrAlert(true);
       return;
     }
     setTasks([
@@ -58,13 +60,26 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  // handleInput
+  const handleInput = (taskName: string) => {
+    setInputTask(taskName);
+    if (errAlert) {
+      setErrAlert(false);
+    }
+  };
+
   return (
     <Container className="app" fixed>
       <Add
         inputTask={inputTask}
-        handleInput={(taskName: string) => setInputTask(taskName)}
+        handleInput={handleInput}
         handleSubmit={handleSubmit}
       />
+      {errAlert && (
+        <Alert variant="outlined" className="alertclass" severity="error">
+          You can't leave inpute blank!
+        </Alert>
+      )}
       <Display tasks={tasks} deleteTask={deleteTask} />
     </Container>
   );
