@@ -1,0 +1,18 @@
+.app {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+form button {
+  margin: 16px 12px !important;
+}
+
+.task_container {
+  width: 40%;
+}
+
+.alertclass {
+  margin-right: 85px;
+}
